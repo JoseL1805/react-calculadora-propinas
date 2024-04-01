@@ -1,10 +1,11 @@
 import { menuItems } from './data/db'
-import { MenuItem } from './components'
+import { MenuItem, OrdersContent } from './components'
 import { useOrder } from './hooks/useOrder'
+import { OrderTotal } from './components/OrderTotal';
 
 
 function App() {
-    const {addItem} = useOrder();
+    const { addItem , order, removeItem} = useOrder();
 
     return (
         <>
@@ -33,8 +34,15 @@ function App() {
 
                 </div>
 
-                <div>
-                    <h2>valores raros</h2>
+                <div className='border border-dashed border-slate-300 px-5 text-center rounded-lg space-y-5'>
+                    <OrdersContent 
+                        order={order} 
+                        removeItem={removeItem}
+                        />
+
+                    { order.length > 0 && 
+                    <OrderTotal/>}
+
                 </div>
 
             </main>
